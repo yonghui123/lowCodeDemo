@@ -1,3 +1,4 @@
-@import "./reset.scss";
-@import "./variables.scss";
-@import "./common.scss";
+@use "./reset";
+@use "./variables";
+@use "./common";
+@use "./coms";

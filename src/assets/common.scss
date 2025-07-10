@@ -48,7 +48,57 @@
   display: flex;
 }
 
+.self-start {
+  align-items: self-start;
+}
 
+.self-center {
+  align-items: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+.justify-content-center {
+  justify-content: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.select {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
 
 // 多行文本溢出显示省略号
 @mixin text-ellipsis($lines: 1) {

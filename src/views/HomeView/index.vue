@@ -9,8 +9,8 @@
     <!-- 问卷列表 -->
     <el-table :data="tableData" style="width: 100%" border>
       <el-table-column fixed prop="createDate" label="创建日期" width="150"></el-table-column>
-      <el-table-column props="title">问卷名称</el-table-column>
-      <el-table-column props="surveyCount" width="150" align="center">题目数量</el-table-column>
+      <el-table-column prop="title" label="问卷名称"></el-table-column>
+      <el-table-column prop="surveyCount" width="150" align="center">题目数量</el-table-column>
       <!-- 最近更新日期 -->
       <el-table-column
         prop="updateDate"
