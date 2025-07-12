@@ -5,15 +5,24 @@
     </div>
     <div class="center">
       <router-view v-slot="{ Component }">
-        <component :is="Component" />
+        <component :is="Component" :serial-num="0" :status="currentCom" />
       </router-view>
     </div>
     <div class="right">编辑面板</div>
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useMaterialStore } from '@/stores/useMaterialStore';
+import type { BaseSelect } from '@/configs/SelectConfig/BaseSelect';
 defineOptions({
-  name: 'Layout',
+  name: 'MaterialLayout',
+});
+
+const materialStore = useMaterialStore();
+
+const currentCom = computed(() => {
+  return (materialStore.coms[materialStore.currentMaterial] as BaseSelect).editComs;
 });
 </script>
 
