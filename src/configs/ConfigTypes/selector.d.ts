@@ -7,13 +7,6 @@ import type {
   SizeEditConfig,
   BaseEditConfig,
 } from '../EditConfig/BaseEdit';
-// 创建类名和对应选择类的映射关系，外部只需要通过类名就可以通过createSelect方法创建对应的选择类
-export const selectClassMap = {
-  singleSelector: SingleSelector,
-  // MultiSelector: MultiSelector,
-};
-
-export type SelectType = keyof typeof selectClassMap;
 
 export type EditComStatusMap<K extends keyof any, C extends Record<K, any>> = {
   // 遍历 K 中的每个键 k
@@ -23,6 +16,19 @@ export type EditComStatusMap<K extends keyof any, C extends Record<K, any>> = {
     : // 如果不是，返回 never 类型
       never;
 };
+// 创建类名和对应选择类的映射关系，外部只需要通过类名就可以通过createSelect方法创建对应的选择类
+export const selectClassMap = {
+  singleSelector: SingleSelector,
+  // MultiSelector: MultiSelector,
+};
+
+export type SelectType = keyof typeof selectClassMap;
+export type SelectInstanceType = InstanceType<(typeof selectClassMap)[SelectType]>;
+export type SelectEditKeyType = keyof SelectInstanceType['editComs'];
+export type SelectEditStatusType = EditComStatusMap<
+  SelectEditKeyType,
+  SelectInstanceType['editComs']
+>;
 
 export interface BaseEditComType {
   title: TextEditConfig;

@@ -2,7 +2,7 @@ import { markRaw } from 'vue';
 import { SingleOptionEditConfig } from '../EditConfig/BaseEdit';
 import { BaseSelect } from './BaseSelect';
 import SingleSelect from '@/components/Survey/Materials/SelectComs/SingleSelect.vue';
-import OptionsEdit from '@/components/Survey/EditItem/OptionEdit.vue';
+import OptionsEdit from '@/components/Survey/EditItem/Editor/OptionEdit.vue';
 import type { SingleEditComKeys, SingleEditComType } from '../ConfigTypes/selector';
 
 export class SingleSelector extends BaseSelect<SingleEditComType, keyof SingleEditComType> {

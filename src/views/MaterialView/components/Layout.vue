@@ -8,13 +8,18 @@
         <component :is="Component" :serial-num="0" :status="currentCom" />
       </router-view>
     </div>
-    <div class="right">编辑面板</div>
+    <div class="right">
+      <EditPannel :com="currentCom" />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, provide } from 'vue';
+import EditPannel from '@/components/Survey/EditItem/Pannels/EditPannel.vue';
 import { useMaterialStore } from '@/stores/useMaterialStore';
-import type { BaseSelect } from '@/configs/SelectConfig/BaseSelect';
+import type { SelectEditKeyType, SelectEditStatusType } from '@/configs/ConfigTypes/selector';
+import MaterialSelectManager from '@/configs/MaterialConfig/SelectManager';
+
 defineOptions({
   name: 'MaterialLayout',
 });
@@ -22,8 +27,17 @@ defineOptions({
 const materialStore = useMaterialStore();
 
 const currentCom = computed(() => {
-  return (materialStore.coms[materialStore.currentMaterial] as BaseSelect).editComs;
+  return materialStore.coms[materialStore.currentMaterial].editComs;
 });
+
+const updateStatus = (configKey: SelectEditKeyType, payLoad: SelectEditStatusType) => {
+  console.log('payLoad: ', payLoad);
+  console.log('configKey: ', configKey);
+  let select = materialStore.coms[materialStore.currentMaterial];
+  console.log('select: ', select);
+  MaterialSelectManager.setSelectEditStatus(select.name, configKey, payLoad);
+};
+provide('updateStatus', updateStatus);
 </script>
 
 <style lang="scss" scoped>

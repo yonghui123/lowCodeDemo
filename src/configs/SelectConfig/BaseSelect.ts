@@ -15,13 +15,13 @@ import {
   StyleEditConfig,
   TextEditConfig,
 } from '../EditConfig/BaseEdit';
-import TitleEdit from '@/components/Survey/EditItem/TitleEdit.vue';
-import DescEdit from '@/components/Survey/EditItem/DescEdit.vue';
-import SizeEdit from '@/components/Survey/EditItem/SizeEdit.vue';
-import WeightEdit from '@/components/Survey/EditItem/WeightEdit.vue';
-import ItalicEdit from '@/components/Survey/EditItem/ItalicEdit.vue';
-import ColorEdit from '@/components/Survey/EditItem/ColorEdit.vue';
-import AlignEdit from '@/components/Survey/EditItem/AlignEdit.vue';
+import TitleEdit from '@/components/Survey/EditItem/Editor/TitleEdit.vue';
+import DescEdit from '@/components/Survey/EditItem/Editor/DescEdit.vue';
+import SizeEdit from '@/components/Survey/EditItem/Editor/SizeEdit.vue';
+import WeightEdit from '@/components/Survey/EditItem/Editor/WeightEdit.vue';
+import ItalicEdit from '@/components/Survey/EditItem/Editor/ItalicEdit.vue';
+import ColorEdit from '@/components/Survey/EditItem/Editor/ColorEdit.vue';
+import AlignEdit from '@/components/Survey/EditItem/Editor/AlignEdit.vue';
 
 // 定义 BaseSelect 类
 export class BaseSelect<T extends BaseEditComType, K extends keyof T> {
@@ -55,9 +55,12 @@ export class BaseSelect<T extends BaseEditComType, K extends keyof T> {
   }
 
   setEditComStatus(name: K, status: EditComStatusMap<keyof T, T>[K]) {
+    console.log('status: ', status);
+    console.log('name: ', name);
     const editor = this.editComs[name];
     if (editor instanceof BaseEditConfig) {
       editor.setStatus(status);
+      console.log('editor: ', editor);
     }
   }
 

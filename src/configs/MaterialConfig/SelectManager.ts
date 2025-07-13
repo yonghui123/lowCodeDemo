@@ -1,21 +1,28 @@
-import { selectClassMap, type SelectType } from '../ConfigTypes/selector.d';
+import {
+  selectClassMap,
+  type SelectType,
+  type SelectInstanceType,
+  type EditStatusType,
+  type SelectEditKeyType,
+  type SelectEditStatusType,
+} from '../ConfigTypes/selector.d';
 import { BaseSelect } from '../SelectConfig/BaseSelect';
 
 // 筛选项管理类，单例类
-class SelectManager {
+class MaterialSelectManager {
   // 使用静态属性存储唯一实例，并显式指定类型
-  private static _instance: SelectManager | null = null;
-  private selectMap: Map<SelectType, BaseSelect> = new Map();
+  private static _instance: MaterialSelectManager | null = null;
+  private selectMap: Map<SelectType, SelectInstanceType> = new Map();
 
   // 私有构造函数，防止外部直接实例化
   private constructor() {}
 
   // 静态 getter 方法，用于获取唯一实例
   public static get instance() {
-    if (!SelectManager._instance) {
-      SelectManager._instance = new SelectManager();
+    if (!MaterialSelectManager._instance) {
+      MaterialSelectManager._instance = new MaterialSelectManager();
     }
-    return SelectManager._instance;
+    return MaterialSelectManager._instance;
   }
 
   // 管理类要有的方法：
@@ -25,7 +32,7 @@ class SelectManager {
       return this.createSelect(name);
     });
   }
-  public createSelect(name: SelectType): BaseSelect {
+  public createSelect(name: SelectType): SelectInstanceType {
     const Selector = selectClassMap[name];
     const select = new Selector();
     select.name = name;
@@ -65,6 +72,19 @@ class SelectManager {
       select.resetAllEditStatus();
     }
   }
+
+  public setSelectEditStatus(
+    selectName: SelectType,
+    editName: SelectEditKeyType,
+    status: SelectEditStatusType,
+  ) {
+    const select = this.getSelect(selectName);
+    console.log('select: ', select);
+    if (select) {
+      // @ts-ignore
+      select.setEditComStatus(editName, status);
+    }
+  }
 }
 
-export default SelectManager.instance;
+export default MaterialSelectManager.instance;
